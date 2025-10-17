@@ -2,51 +2,52 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login / Signup</title>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="auth.css">
-  <script src="../script.js" defer></script>
-  <script src="auth.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Signup</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="auth.css">
+    <script src="../script.js" defer></script>
+    <script src="auth.js" defer></script>
 </head>
 
 <body>
-  <header>
-    <div class="header-content container">
-      <a href="../index.html" class="logo">MyShop</a>
-      <nav>
-        <ul>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="../products/products.html">Products</a></li>
-          <li><a href="../cart/cart.html">Cart</a></li>
-          <li><a href="../orders/orders.html">Orders</a></li>
-          <li><a href="../auth/auth.html">Login</a></li>
-          <li><a href="../admin/admin.html">Admin</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <div class="header-content container">
+            <a href="../index.html" class="logo">MyShop</a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../products/products.html">Products</a></li>
+                    <li><a href="../cart/cart.html">Cart</a></li>
+                    <li><a href="../orders/orders.html">Orders</a></li>
+                    <li><a href="../auth/auth.html" id="loginLink">Login</a></li>
+                    <li><a href="../admin/admin.html" id="adminLink">Admin</a></li>
+                    <li><button id="logoutBtn" class="logout-btn">Logout</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <main class="auth-container">
-    <form id="login-form">
-      <h2>Login</h2>
-      <input type="email" id="login-email" placeholder="Email" required>
-      <input type="password" id="login-password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
+    <main class="auth-container">
+        <form id="login-form">
+            <h2>Login</h2>
+            <input type="email" id="login-email" placeholder="Email" required autocomplete="off">
+            <input type="password" id="login-password" placeholder="Password" required autocomplete="new-password">
+            <button type="submit">Login</button>
+        </form>
 
-    <form id="signup-form">
-      <h2>Sign Up</h2>
-      <input type="text" id="signup-username" placeholder="Username" required>
-      <input type="email" id="signup-email" placeholder="Email" required>
-      <input type="password" id="signup-password" placeholder="Password" required>
-      <label>
-        <input type="checkbox" id="signup-is-admin"> Register as Admin
-      </label>
-      <button type="submit">Sign Up</button>
-    </form>
-  </main>
+        <form id="signup-form">
+            <h2>Sign Up</h2>
+            <input type="text" id="signup-username" placeholder="Username" required autocomplete="off">
+            <input type="email" id="signup-email" placeholder="Email" required autocomplete="off">
+            <input type="password" id="signup-password" placeholder="Password" required autocomplete="new-password">
+            <label>
+                <input type="checkbox" id="signup-is-admin"> Register as Admin
+            </label>
+            <button type="submit">Sign Up</button>
+        </form>
+    </main>
 </body>
 
 </html>

@@ -1,12 +1,26 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const user = getCurrentUser();
+
+  // Protect admin page
+  if (!user || !user.is_admin) {
+    alert("Access denied. Admins only.");
+    window.location.href = "../index.html";
+    return;
+  }
+
+  renderAdmin();
+});
+
 function renderAdmin() {
-  document.getElementById("total-products").textContent =
-    (getData("products") || []).length;
+  const products = getData("products") || [];
+  const orders = getData("orders") || [];
+  const users = getData("users") || [];
 
-  document.getElementById("total-orders").textContent =
-    (getData("orders") || []).length;
+  const totalProductsEl = document.getElementById("total-products");
+  const totalOrdersEl = document.getElementById("total-orders");
+  const totalUsersEl = document.getElementById("total-users");
 
-  document.getElementById("total-users").textContent =
-    (getData("users") || []).length;
+  if (totalProductsEl) totalProductsEl.textContent = products.length;
+  if (totalOrdersEl) totalOrdersEl.textContent = orders.length;
+  if (totalUsersEl) totalUsersEl.textContent = users.length;
 }
-
-renderAdmin();

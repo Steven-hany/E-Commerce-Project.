@@ -27,9 +27,10 @@ function setCurrentUser(u) {
 
 function logoutUser() {
   removeData("currentUser");
-  window.location.href = "index.html";
+  window.location.href = "login/login.html"; // رجّع المستخدم لصفحة تسجيل الدخول
 }
 
+// Cart helper
 function addToCart(id) {
   let cart = getData("cart") || [];
   const products = getData("products") || [];
@@ -47,3 +48,33 @@ function addToCart(id) {
   saveData("cart", cart);
   alert("Added to cart!");
 }
+
+// Navbar logic
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.getElementById("logoutBtn");
+  const loginLink = document.getElementById("loginLink");
+  const adminLink = document.getElementById("adminLink");
+  const user = getCurrentUser();
+
+  if (user) {
+    if (logoutBtn) logoutBtn.style.display = "inline-block";
+    if (loginLink) loginLink.style.display = "none";
+
+    if (adminLink && !user.is_admin) {
+      adminLink.style.display = "none";
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        logoutUser();
+      });
+    }
+  } else {
+    if (logoutBtn) logoutBtn.style.display = "none";
+    if (adminLink) adminLink.style.display = "none";
+  }
+  function logoutUser() {
+  removeData("currentUser");
+  window.location.href = "../auth/auth.html"; 
+}
+});
