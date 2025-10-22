@@ -1,21 +1,14 @@
-import sql from "mssql";
+import 'dotenv/config';
+import mysql from 'mysql2/promise';
 
-const config = {
-  user: "sa",
-  password: "your_sql_password",
-  server: "127.0.0.1", // ← أو اسم الجهاز الحقيقي
-  port: 1433,
-  database: "ecommerce_db",
-  options: {
-    encrypt: false,
-    trustServerCertificate: true,
-  },
-};
-
-sql.connect(config)
-  .then(() => {
-    console.log("✅ Connected to SQL Server");
-  })
-  .catch((err) => {
-    console.error("❌ Connection failed:", err);
-  });
+export const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT || 3306),
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+});
+const [rows] = await pool.query('SELECT 1 AS ok');
+console.log(rows)
