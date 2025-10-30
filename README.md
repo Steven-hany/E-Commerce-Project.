@@ -4,7 +4,7 @@
 MyShop is a pretty simple e-commerce web app built using **HTML, CSS, and Vanilla JavaScript** only.  
 It demonstrates core e-commerce features like authentication, product catalog, shopping cart, orders, and admin dashboard — all managed using **localStorage**.
 
----
+---------- 
 
 ## Features
 
