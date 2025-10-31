@@ -1,0 +1,30 @@
+.admin-container h2 {
+  text-align: center;
+  color: var(--primary);
+  margin: 20px 0;
+}
+
+.admin-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.admin-card h3 {
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.admin-card .value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+}
