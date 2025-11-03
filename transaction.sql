@@ -126,7 +126,6 @@ BEGIN
 END
 GO
 
-
 -- test--
 -- 1. أنشئ مستخدم وسلة
 INSERT INTO users (username, email, password, is_admin) VALUES ('test', 'test@shop.com', 'xxx', 0);
@@ -135,4 +134,3 @@ DECLARE @UserId INT = SCOPE_IDENTITY();
 -- 2. أضف منتجات
 INSERT INTO categories (name) VALUES ('Electronics');
 INSERT INTO products (name, price, stock, category_id) VALUES ('Phone', 500, 10, 1);
-
