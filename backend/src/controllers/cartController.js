@@ -1,6 +1,6 @@
 import { body, param, validationResult } from 'express-validator';
-import { asyncHandler } from '../middleware/errorHandler.js';
 import { CartService } from '../services/cartService.js';
+import asyncHandler from 'express-async-handler'; // ✅ صح
 
 export const getCart = asyncHandler(async (req, res) => {
   const cart = await CartService.getCartWithTotals(
@@ -16,9 +16,9 @@ export const addOrUpdateCartItem = [
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ 
-        error: 'Validation failed', 
-        details: errors.array() 
+      return res.status(400).json({
+        error: 'Validation failed',
+        details: errors.array()
       });
     }
 
@@ -38,9 +38,9 @@ export const removeCartItem = [
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ 
-        error: 'Validation failed', 
-        details: errors.array() 
+      return res.status(400).json({
+        error: 'Validation failed',
+        details: errors.array()
       });
     }
 

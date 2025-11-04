@@ -26,7 +26,7 @@ export const ProductsController = {
   },
 
   create: async (req, res) => {
-    const productRepo = AppDataSource.getRepository('Product');
+    const repo = AppDataSource.getRepository('Product');
     const catRepo = AppDataSource.getRepository('Category');
     const { name, description, price, stock_qty, category_id } = req.body;
     if (!name || price === undefined || !category_id) return res.status(400).json({ error: 'Missing fields' });
@@ -34,8 +34,8 @@ export const ProductsController = {
     const category = await catRepo.findOne({ where: { id: Number(category_id) } });
     if (!category) return res.status(400).json({ error: 'Invalid category_id' });
 
-    const product = productRepo.create({ name, description: description ?? null, price, stock_qty: stock_qty ?? 0, category });
-    await productRepo.save(product);
+    const product = repo.create({ name, description: description ?? null, price, stock_qty: stock_qty ?? 0, category });
+    await repo.save(product);
     res.status(201).json(product);
   },
 

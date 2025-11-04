@@ -1,11 +1,11 @@
-import { AppDataSource } from '../config/database.js';
+import { AppDataSource } from '../database config.js';
 import { Cart } from '../models/Cart.js';
 import { CartItem } from '../models/CartItem.js';
-import { Product } from '../models/Product.js';
+import { ProductSchema } from '../models/Product.js';
 
 const cartRepository = AppDataSource.getRepository(Cart);
 const cartItemRepository = AppDataSource.getRepository(CartItem);
-const productRepository = AppDataSource.getRepository(Product);
+const productRepository = AppDataSource.getRepository(ProductSchema);
 
 export class CartService {
   static async getOrCreateCart(userId) {

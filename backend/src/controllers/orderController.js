@@ -1,59 +1,44 @@
-import { AppDataSource } from "../config/database.js";
+import { AppDataSource } from "../database config.js";
 import { Order } from "../models/Order.js";
+import asyncHandler from "express-async-handler";
 
-export class OrderController {
-    // إنشاء طلب جديد
-    static async createOrder(req, res) {
-        try {
-            const { items, total, date, status } = req.body;
-            const userId = req.user?.id || 'anonymous';
+// إنشاء طلب جديد
+export const createOrder = asyncHandler(async (req, res) => {
+  const { items, total, date, status } = req.body;
+  const userId = req.user?.id || "anonymous";
 
-            const orderRepository = AppDataSource.getRepository(Order);
-            
-            const order = orderRepository.create({
-                orderId: `ORD_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-                userId,
-                items,
-                total,
-                status: status || 'pending',
-                createdAt: new Date()
-            });
+  const orderRepository = AppDataSource.getRepository(Order);
 
-            await orderRepository.save(order);
+  const order = orderRepository.create({
+    orderId: `ORD_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+    userId,
+    items,
+    total,
+    status: status || "pending",
+    createdAt: new Date()
+  });
 
-            res.status(201).json({
-                success: true,
-                message: 'تم إنشاء الطلب بنجاح',
-                order: order
-            });
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                error: 'فشل في إنشاء الطلب'
-            });
-        }
-    }
+  await orderRepository.save(order);
 
-    // جلب جميع طلبات المستخدم
-    static async getOrders(req, res) {
-        try {
-            const userId = req.user?.id || 'anonymous';
+  res.status(201).json({
+    success: true,
+    message: "تم إنشاء الطلب بنجاح",
+    order
+  });
+});
 
-            const orderRepository = AppDataSource.getRepository(Order);
-            const orders = await orderRepository.find({
-                where: { userId },
-                order: { createdAt: 'DESC' }
-            });
+// جلب جميع طلبات المستخدم
+export const getOrders = asyncHandler(async (req, res) => {
+  const userId = req.user?.id || "anonymous";
 
-            res.json({
-                success: true,
-                orders: orders
-            });
-        } catch (error) {
-            res.status(500).json({
-                success: false,
-                error: 'فشل في جلب الطلبات'
-            });
-        }
-    }
-}
+  const orderRepository = AppDataSource.getRepository(Order);
+  const orders = await orderRepository.find({
+    where: { userId },
+    order: { createdAt: "DESC" }
+  });
+
+  res.json({
+    success: true,
+    orders
+  });
+});

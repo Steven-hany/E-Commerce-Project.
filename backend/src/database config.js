@@ -1,10 +1,10 @@
 import { DataSource } from 'typeorm';
-import { CartSchema } from '../models/Cart.js';
-import { CartItemSchema } from '../models/CartItem.js';
-import { OrderSchema } from '../models/Order.js';
-import { OrderItemSchema } from '../models/OrderItem.js';
-import { ProductSchema } from '../models/Product.js';
-import { UserSchema } from '../models/User.js';
+import { CartSchema } from './models/Cart.js';
+import { CartItemSchema } from './models/CartItem.js';
+import { OrderSchema } from './models/Order.js';
+import { OrderItemSchema } from './models/OrderItem.js';
+import { ProductSchema } from './models/Product.js';
+import { User } from './models/User.js';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
   synchronize: process.env.NODE_ENV !== 'production',
   logging: process.env.NODE_ENV === 'development',
   entities: [
-    UserSchema,
+    User,
     ProductSchema,
     CartSchema,
     CartItemSchema,

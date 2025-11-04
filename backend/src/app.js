@@ -3,6 +3,10 @@ import "reflect-metadata";
 import { errorHandler } from "./middleware/errorHandler.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import { swaggerServe, swaggerSetup } from "./swagger.js";
 
 const app = express();
@@ -17,6 +21,10 @@ app.use((req, res, next) => {
 // ربط المسارات
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/products", productRoutes);
+app.use("/api/v1/cart", cartRoutes);
+app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 // ربط Swagger UI
 app.use("/api-docs", swaggerServe, swaggerSetup);

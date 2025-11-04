@@ -11,8 +11,13 @@ import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-/*
- * @swagger
+/** * @swagger
+ * tags:
+ * - name: Auth
+ * description: عمليات تسجيل المستخدمين وتفاصيل الحساب
+ */
+
+/** * @swagger
  * /auth/register:
  * post:
  * summary: Register a new user
@@ -33,8 +38,7 @@ const router = express.Router();
  */
 router.post("/register", register);
 
-/*
- * @swagger
+/** * @swagger
  * /auth/login:
  * post:
  * summary: Login user
@@ -54,11 +58,11 @@ router.post("/register", register);
  */
 router.post("/login", loginLimiter, login);
 
-/*
+/**
  * @swagger
  * /auth/me:
  * get:
- * summary: Get current logged-in user
+ * summary: Get current logged-in user info
  * tags: [Auth]
  * security:
  * - bearerAuth: []
@@ -68,8 +72,7 @@ router.post("/login", loginLimiter, login);
  */
 router.get("/me", protect, getMe);
 
-/*
- * @swagger
+/** * @swagger
  * /auth/me:
  * put:
  * summary: Update current user info
@@ -91,8 +94,7 @@ router.get("/me", protect, getMe);
  */
 router.put("/me", protect, updateMe);
 
-/*
- * @swagger
+/** * @swagger
  * /auth/me:
  * delete:
  * summary: Delete current user (soft delete)
