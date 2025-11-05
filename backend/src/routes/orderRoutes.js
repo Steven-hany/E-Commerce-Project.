@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as OrderController from "../controllers/orderController.js";
+import {getOrders, createOrder} from "../controllers/orderController.js";
 import { protect } from "../middleware/authJwt.js";
 
 const router = Router();
@@ -18,7 +18,7 @@ const router = Router();
  *       401:
  *         description: Unauthorized
  */
-router.get("/", protect, OrderController.getOrders);
+router.get("/", protect, getOrders);
 
 /**
  * @swagger
@@ -53,6 +53,6 @@ router.get("/", protect, OrderController.getOrders);
  *       401:
  *         description: Unauthorized
  */
-router.post("/", protect, OrderController.createOrder);
+router.post("/", protect, createOrder);
 
 export default router;

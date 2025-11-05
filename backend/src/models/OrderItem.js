@@ -1,3 +1,4 @@
+
 import { EntitySchema } from 'typeorm';
 
 export class OrderItem {
@@ -13,19 +14,19 @@ export class OrderItem {
 
 export const OrderItemSchema = new EntitySchema({
   name: 'OrderItem',
-  tableName: 'order_item',
+  tableName: 'order_items',
   columns: {
     id: {
-      type: 'uuid',
+      type: 'integer',
       primary: true,
-      generated: 'uuid',
+      generated: true,
     },
     order_id: {
-      type: 'uuid',
+      type: 'integer',
       nullable: false,
     },
     product_id: {
-      type: 'uuid',
+      type: 'integer',
       nullable: false,
     },
     quantity: {
@@ -39,7 +40,7 @@ export const OrderItemSchema = new EntitySchema({
       nullable: false,
     },
     created_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       createDate: true,
     },
   },

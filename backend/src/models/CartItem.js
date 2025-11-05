@@ -15,16 +15,16 @@ export const CartItemSchema = new EntitySchema({
   tableName: 'cart_items',
   columns: {
     id: {
-      type: 'uuid',
+      type: 'integer',
       primary: true,
-      generated: 'uuid',
+      generated: true,
     },
     cart_id: {
-      type: 'uuid',
+      type: 'integer',
       nullable: false,
     },
     product_id: {
-      type: 'uuid',
+      type: 'integer',
       nullable: false,
     },
     quantity: {
@@ -33,11 +33,11 @@ export const CartItemSchema = new EntitySchema({
       nullable: false,
     },
     created_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       createDate: true,
     },
     updated_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       updateDate: true,
     },
   },

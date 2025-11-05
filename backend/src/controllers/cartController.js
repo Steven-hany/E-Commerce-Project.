@@ -28,7 +28,7 @@ export const getCart = asyncHandler(async (req, res) => {
 
 // ➕ إضافة أو تعديل عنصر في السلة
 export const addOrUpdateCartItem = [
-  body('product_id').isUUID().withMessage('Valid product ID is required'),
+  body('productId').isString().withMessage('Valid product ID is required'),
   body('quantity').isInt({ min: 1 }).withMessage('Quantity must be at least 1'),
 
   asyncHandler(async (req, res) => {
@@ -40,7 +40,8 @@ export const addOrUpdateCartItem = [
       });
     }
 
-    const { product_id, quantity } = req.body;
+    const { productId, quantity } = req.body;
+    const parsedQuantity = Math.floor(Number(quantity));
 
     const cartRepo = AppDataSource.getRepository(CartSchema);
     const itemRepo = AppDataSource.getRepository(CartItemSchema);
@@ -56,15 +57,15 @@ export const addOrUpdateCartItem = [
     let item = await itemRepo.findOne({
       where: {
         cart: { id: cart.id },
-        product: { id: product_id }
+        product: { id: productId }
       },
       relations: ['cart', 'product'],
     });
 
     if (item) {
-      item.quantity = quantity;
+      item.quantity = parsedQuantity;
     } else {
-      const product = await productRepo.findOneBy({ id: product_id });
+      const product = await productRepo.findOneBy({ id: productId });
       if (!product) {
         return res.status(404).json({ error: 'Product not found' });
       }
@@ -72,7 +73,7 @@ export const addOrUpdateCartItem = [
       item = itemRepo.create({
         cart,
         product,
-        quantity,
+        quantity: parsedQuantity,
       });
     }
 
@@ -89,7 +90,7 @@ export const addOrUpdateCartItem = [
 
 // ❌ حذف عنصر من السلة
 export const removeCartItem = [
-  param('productId').isUUID().withMessage('Valid product ID is required'),
+  param('productId').isString().withMessage('Valid product ID is required'),
 
   asyncHandler(async (req, res) => {
     const errors = validationResult(req);

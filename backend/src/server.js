@@ -20,6 +20,8 @@ import categoryRoutes from './routes/categoryRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import { OrderSchema } from "./models/Order.js";
+import { OrderItemSchema } from "./models/OrderItem.js";
 
 // إعداد مسار الـ .env
 const __filename = fileURLToPath(import.meta.url);
@@ -45,7 +47,7 @@ AppDataSource.setOptions({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [User, ProductSchema, CategorySchema, CartSchema , CartItemSchema], // ✅ ضيف باقي الـ Entities هنا
+  entities: [User, ProductSchema, CategorySchema, CartSchema , CartItemSchema,OrderSchema,OrderItemSchema], // ✅ ضيف باقي الـ Entities هنا
   synchronize: false,
   options: {
     encrypt: false,

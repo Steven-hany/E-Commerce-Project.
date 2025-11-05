@@ -14,24 +14,24 @@ export const CartSchema = new EntitySchema({
   tableName: 'carts',
   columns: {
     id: {
-      type: 'uuid',
+      type: 'int',
       primary: true,
-      generated: 'uuid',
+      generated: true,
     },
     is_active: {
       type: 'bit',
       default: true,
     },
     user_id: {
-      type: 'uuid',
+      type: 'int',
       nullable: false,
     },
     created_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       createDate: true,
     },
     updated_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       updateDate: true,
     },
   },

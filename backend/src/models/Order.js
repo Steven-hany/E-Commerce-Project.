@@ -12,15 +12,15 @@ export class Order {
 
 export const OrderSchema = new EntitySchema({
   name: 'Order',
-  tableName: 'order',
+  tableName: 'orders',
   columns: {
     id: {
-      type: 'uuid',
+      type: 'integer',
       primary: true,
-      generated: 'uuid',
+      generated: true,
     },
     user_id: {
-      type: 'uuid',
+      type: 'integer',
       nullable: false,
     },
     total: {
@@ -31,11 +31,11 @@ export const OrderSchema = new EntitySchema({
     },
    
     created_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       createDate: true,
     },
     updated_at: {
-      type: 'timestamp',
+      type: 'datetime2',
       updateDate: true,
     },
   },
@@ -44,12 +44,12 @@ export const OrderSchema = new EntitySchema({
       target: 'User',
       type: 'many-to-one',
       joinColumn: { name: 'user_id' },
-      inverseSide: 'orders',
+      inverseSide: 'Order',
     },
     orderItems: {
       target: 'OrderItem',
       type: 'one-to-many',
-      inverseSide: 'order',
+      inverseSide: 'Order',
     },
   },
 });
