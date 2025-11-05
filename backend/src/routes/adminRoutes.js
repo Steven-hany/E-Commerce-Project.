@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import * as adminController from '../controllers/adminController.js';
+import { metrics, deleteProduct, getOverview } from '../controllers/adminController.js';
 import { protect } from '../middleware/authJwt.js';
 import { requireAdmin } from '../middleware/requireAdmin.js';
 
@@ -19,7 +19,7 @@ const r = Router();
  *       401:
  *         description: Unauthorized
  */
-r.get('/metrics', protect, requireAdmin, adminController.metrics);
+r.get('/metrics', protect, requireAdmin,metrics);
 
 /**
  * @swagger
@@ -43,7 +43,7 @@ r.get('/metrics', protect, requireAdmin, adminController.metrics);
  *       401:
  *         description: Unauthorized
  */
-r.delete('/products/:id', protect, requireAdmin, adminController.deleteProduct);
+r.delete('/products/:id', protect, requireAdmin,deleteProduct);
 
 /**
  * @swagger
@@ -59,6 +59,6 @@ r.delete('/products/:id', protect, requireAdmin, adminController.deleteProduct);
  *       401:
  *         description: Unauthorized
  */
-r.get('/overview', protect, requireAdmin, adminController.getOverview);
+r.get('/overview', protect, requireAdmin,getOverview);
 
 export default r;

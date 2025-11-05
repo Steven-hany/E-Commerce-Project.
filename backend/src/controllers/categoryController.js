@@ -1,7 +1,8 @@
 import { AppDataSource } from '../data-source.js';
+import { CategorySchema } from '../models/Category.js';
 
 export const list = async (_req, res) => {
-  const items = await AppDataSource.getRepository('Category').find({
+  const items = await AppDataSource.getRepository(CategorySchema).find({
     order: { name: 'ASC' }
   });
   res.json(items);

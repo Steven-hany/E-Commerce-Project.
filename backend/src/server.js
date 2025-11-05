@@ -7,6 +7,8 @@ import { fileURLToPath } from "url";
 import { User } from "./models/User.js";
 import { ProductSchema } from "./models/Product.js";
 import { CategorySchema } from "./models/Category.js";
+import { CartSchema } from "./models/Cart.js";
+import { CartItemSchema } from "./models/CartItem.js";
 import { swaggerServe, swaggerSetup } from "./swagger.js";
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -43,7 +45,7 @@ AppDataSource.setOptions({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [User, ProductSchema, CategorySchema], // ✅ ضيف باقي الـ Entities هنا
+  entities: [User, ProductSchema, CategorySchema, CartSchema , CartItemSchema], // ✅ ضيف باقي الـ Entities هنا
   synchronize: false,
   options: {
     encrypt: false,

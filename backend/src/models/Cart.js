@@ -10,12 +10,17 @@ export class Cart {
 
 export const CartSchema = new EntitySchema({
   name: 'Cart',
-  tableName: 'cart',
+  target: Cart, // ✅ ربط الكلاس بالـ EntitySchema
+  tableName: 'carts',
   columns: {
     id: {
       type: 'uuid',
       primary: true,
       generated: 'uuid',
+    },
+    is_active: {
+      type: 'bit',
+      default: true,
     },
     user_id: {
       type: 'uuid',

@@ -12,7 +12,7 @@ export class CartItem {
 
 export const CartItemSchema = new EntitySchema({
   name: 'CartItem',
-  tableName: 'cart_item',
+  tableName: 'cart_items',
   columns: {
     id: {
       type: 'uuid',

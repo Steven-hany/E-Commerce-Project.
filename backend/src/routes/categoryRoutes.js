@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { requireAdmin } from '../middleware/requireAdmin.js';
-import * as CategoriesController from '../controllers/categoryController.js';
+import {list,getOne,create,remove} from '../controllers/categoryController.js';
+
 import { protect } from '../middleware/authJwt.js';
 
 const router = Router();
@@ -22,7 +23,7 @@ const router = Router();
  *       200:
  *         description: Returns a list of categories
  */
-router.get('/', CategoriesController.list);
+router.get('/',list);
 
 /**
  * @swagger
@@ -42,7 +43,7 @@ router.get('/', CategoriesController.list);
  *       404:
  *         description: Category not found
  */
-router.get('/:id', CategoriesController.getOne);
+router.get('/:id', getOne);
 
 /**
  * @swagger
@@ -69,7 +70,7 @@ router.get('/:id', CategoriesController.getOne);
  *       401:
  *         description: Unauthorized
  */
-router.post('/', protect, requireAdmin, CategoriesController.create);
+router.post('/', protect, requireAdmin, create);
 
 /**
  * @swagger
@@ -91,6 +92,6 @@ router.post('/', protect, requireAdmin, CategoriesController.create);
  *       401:
  *         description: Unauthorized
  */
-router.delete('/:id', protect, requireAdmin, CategoriesController.remove);
+router.delete('/:id', protect, requireAdmin, remove);
 
 export default router;

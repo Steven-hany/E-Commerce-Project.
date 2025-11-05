@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { ProductsController } from '../controllers/productController.js';
 import { protect } from '../middleware/authJwt.js';
 import { requireAdmin } from '../middleware/requireAdmin.js'; // ✅
-import { AppDataSource } from '../data-source.js';
+import {list,getOne,create,update,remove} from '../controllers/productController.js';
+
 
 const r = Router();
 
@@ -32,7 +32,7 @@ const r = Router();
  * items:
  * $ref: '#/components/schemas/Product'
  */
-r.get('/', ProductsController.list);
+r.get('/',list);
 
 // ----------------------------------------------------------------------
 // 2. GET /products/{id} - عرض منتج واحد
@@ -59,7 +59,7 @@ r.get('/', ProductsController.list);
  * 404:
  * description: المنتج غير موجود
  */
-r.get('/:id', ProductsController.getOne);
+r.get('/:id',getOne);
 
 // ----------------------------------------------------------------------
 // 3. POST /products - إنشاء منتج جديد (للمشرفين فقط)
@@ -90,10 +90,8 @@ r.get('/:id', ProductsController.getOne);
  * 403:
  * description: ممنوع (ليس لديك صلاحيات المشرف)
  */
-console.log('protect:', typeof protect);
-console.log('requireAdmin:', typeof requireAdmin);
-console.log('ProductsController.create:', typeof ProductsController.create);
-r.post('/', protect, requireAdmin, ProductsController.create);
+
+r.post('/', protect, requireAdmin, create);
 
 // ----------------------------------------------------------------------
 // 4. PUT /products/{id} - تحديث منتج (للمشرفين فقط)
@@ -126,7 +124,7 @@ r.post('/', protect, requireAdmin, ProductsController.create);
  * 404:
  * description: المنتج غير موجود
  */
-r.put('/:id', protect, requireAdmin, ProductsController.update);
+r.put('/:id', protect, requireAdmin,update);
 
 // ----------------------------------------------------------------------
 // 5. DELETE /products/{id} - حذف منتج (للمشرفين فقط)
@@ -153,6 +151,6 @@ r.put('/:id', protect, requireAdmin, ProductsController.update);
  * 404:
  * description: المنتج غير موجود
  */
-r.delete('/:id', protect, requireAdmin, ProductsController.remove);
+r.delete('/:id', protect, requireAdmin,remove);
 
 export default r;
